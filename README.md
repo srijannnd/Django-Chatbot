@@ -22,10 +22,10 @@ Demo Link: https://django-chatbot-sgzfhmemub.now.sh/
 <img src="https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/1.jpeg" height="600"><br/>
 #
 
-![alt text](https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/2.jpeg)<br/>
+<img src="https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/2.jpeg" height="600"><br/>
 #
 
-![alt text](https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/3.jpeg)<br/>
+<img src="https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/3.jpeg" height="600"><br/>
 #
 
-![alt text](https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/4.jpeg)<br/>
+<img src="https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/4.jpeg" height="600"><br/>
