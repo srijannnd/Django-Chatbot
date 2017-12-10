@@ -19,7 +19,7 @@ Demo Link: https://django-chatbot-sgzfhmemub.now.sh/
 <br/>
 <br/>
 
-<img src="https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/1.jpeg" height="300"><br/>
+<img src="https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/1.jpeg" height="600"><br/>
 #
 
 ![alt text](https://github.com/srijannnd/Django-Chatbot/blob/master/screenshots/2.jpeg)<br/>
