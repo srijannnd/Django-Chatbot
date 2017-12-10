@@ -19,7 +19,7 @@ Demo Link: https://django-chatbot-sgzfhmemub.now.sh/
 <br/>
 <br/>
 
-<img src="./screenshots/1.jpeg" height="600" hspace="40"><img src="./screenshots/2.jpeg" height="600">
+<img src="./screenshots/1.jpeg" height="600" hspace="40"><img src="./screenshots/2.jpeg" height="600" hspace="40">
 <br/>
 <br/>
-<img src="./screenshots/3.jpeg" height="600" hspace="40"><img src="./screenshots/4.jpeg" height="600">
+<img src="./screenshots/3.jpeg" height="600" hspace="40"><img src="./screenshots/4.jpeg" height="600" hspace="40">
