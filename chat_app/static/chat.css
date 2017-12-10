@@ -1,11 +1,21 @@
+body {
+    height: 100%;
+    margin: 0%;
+}
+
 #chat-bottom {
     position: fixed;
     bottom: 10px;
-    padding-left : 50px;
-    padding-right: 50px;
+    padding-left : 8%;
+    padding-right: 8%;
+    background: white;
 }
 
 .panel-body {
     overflow-y: scroll;
     height: 85%;
+}
+
+.list-group-item {
+    margin-bottom: 15px;
 }
