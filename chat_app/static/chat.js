@@ -8,7 +8,8 @@ $('#chat-form').on('submit', function(event){
 
         success : function(json){
             $('#chat-msg').val('');
-            $('#msg-list').append('<li class="text-left list-group-item">' + json.msg + '</li>');
+            $('#msg-list').append('<li class="text-left query list-group-item">' + json.query + '</li>');
+            $('#msg-list').append('<li class="text-left response list-group-item">' + json.response + '</li>');
             var chatlist = document.getElementById('msg-list-div');
             chatlist.scrollTop = chatlist.scrollHeight;
         }

@@ -18,4 +18,13 @@ body {
 
 .list-group-item {
     margin-bottom: 15px;
+    border: 1px solid #fff;
+}
+
+.query {
+    background: beige;
+}
+
+.response {
+    background: aliceblue;
 }

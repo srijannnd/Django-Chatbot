@@ -1,15 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from chatbot import Chat, reflections, multiFunctionCall
-import requests
+import requests, os
 from django.views.decorators.csrf import csrf_exempt
-
-pairs = (
-  ("(Do you know about|what is|who is|tell me about|tell me something about)(.*)",
-  ("{% call whoIs:%2 %}",)),
-  ("(Show|display|recently|recent)(.*)",
-   ("{% call results:%2 %}",))
-)
+from .models import Conversation
 
 
 def whoIs(query, sessionID="general"):
@@ -24,14 +18,14 @@ def whoIs(query, sessionID="general"):
 
 def results(query, sessionID="general"):
     query_list = query.split(' ')
-    query_list = [x for x in query_list if x not in ['posted', 'questions', 'recently', 'recent', 'display', '', 'show']]
+    query_list = [x for x in query_list if x not in ['posted', 'questions', 'recently', 'recent', 'display', '', 'in', 'of', 'show']]
     # print(query_list)
     if len(query_list) == 1:
         # print('con 1')
         try:
             response = requests.get('https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&tagged=' + query_list[0] + '&site=stackoverflow')
             data = response.json()
-            data_list = [data['items'][i]['title'] for i in range(5)]
+            data_list = [str(i+1)+'. ' + data['items'][i]['title'] for i in range(5)]
             return '<br/>'.join(data_list)
         except:
             pass
@@ -43,21 +37,21 @@ def results(query, sessionID="general"):
         try:
             response = requests.get('https://api.stackexchange.com/2.2/questions?pagesize='+ n +'&order=desc&sort=activity&tagged=' + tag + '&site=stackoverflow')
             data = response.json()
-            data_list = [data['items'][i]['title'] for i in range(int(n))]
+            data_list = [str(i+1)+'. ' + data['items'][i]['title'] for i in range(int(n))]
             return '<br/>'.join(data_list)
         except:
             pass
 
     else:
         # print('con 3')
-        query_list = [x for x in query_list if x not in ['which', 'where', 'whos', 'who\'s' 'is', 'are', 'answered', 'not', 'unanswered', 'of', 'for']]
+        query_list = [x for x in query_list if x not in ['which', 'where', 'whos', 'who\'s' 'is', 'are', 'answered', 'not', 'unanswered', 'for', 'of', 'for']]
         # print(query_list)
         if len(query_list) ==1:
             try:
                 response = requests.get(
                     'https://api.stackexchange.com/2.2/questions/no-answers?pagesize=5&order=desc&sort=activity&tagged=' + query_list[0] + '&site=stackoverflow')
                 data = response.json()
-                data_list = [data['items'][i]['title'] for i in range(5)]
+                data_list = [str(i+1)+'. ' + data['items'][i]['title'] for i in range(5)]
                 return '<br/>'.join(data_list)
             except:
                 pass
@@ -69,7 +63,8 @@ def results(query, sessionID="general"):
                 response = requests.get(
                     'https://api.stackexchange.com/2.2/questions/no-answers?pagesize='+ n +'&order=desc&sort=activity&tagged=' + tag + '&site=stackoverflow')
                 data = response.json()
-                data_list = [data['items'][i]['title'] for i in range(int(n))]
+                data_list = [str(i+1)+'. ' + data['items'][i]['title'] for i in range(int(n))]
+
                 return '<br/>'.join(data_list)
             except:
                 pass
@@ -82,7 +77,11 @@ firstQuestion = "Hi, How may i help you?"
 call = multiFunctionCall({"whoIs": whoIs,
                               "results": results})
 
-chat = Chat(pairs, reflections, call=call)
+chat = Chat(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "chatbotTemplate",
+                         "Example.template"
+                         ),
+            reflections, call=call)
 
 
 def initiateChat():
@@ -102,7 +101,20 @@ def Post(request):
         query = request.POST.get('msgbox', None)
         response = chat.respond(query)
         chat.conversation["general"].append(response)
-        return JsonResponse({'msg': response, 'user': 'user'})
+        #c = Conversation(query=query, response=response)
+        return JsonResponse({'response': response, 'query': query})
     else:
         return HttpResponse('Request must be POST.')
+
+
+'''
+def Post(request):
+    if request.method == "POST":
+        msg = request.POST.get('msgbox', None)
+        c = Chat(message=msg)
+        if msg != '':
+            c.save()
+        return JsonResponse({'msg': msg, 'user': 'user'})
+    else:
+        return HttpResponse('Request must be POST.')'''
 
