@@ -7,6 +7,8 @@ from .models import Conversation
 
 
 def whoIs(query, sessionID="general"):
+    if query[-2] == '?':
+        query = query[:len(query)-2]
     try:
         response = requests.get('http://api.stackexchange.com/2.2/tags/' + query + '/wikis?site=stackoverflow')
         data = response.json()
@@ -44,7 +46,7 @@ def results(query, sessionID="general"):
 
     else:
         # print('con 3')
-        query_list = [x for x in query_list if x not in ['which', 'where', 'whos', 'who\'s' 'is', 'are', 'answered', 'not', 'unanswered', 'for', 'of', 'for']]
+        query_list = [x for x in query_list if x not in ['which', 'where', 'whos', 'who\'s' 'is', 'are', 'answered', 'not', 'unanswered', 'for']]
         # print(query_list)
         if len(query_list) ==1:
             try:
@@ -84,11 +86,6 @@ chat = Chat(os.path.join(os.path.dirname(os.path.abspath(__file__)),
             reflections, call=call)
 
 
-def initiateChat():
-    chat._startNewSession("general")
-    chat.conversation["general"].append("Hi!.")
-
-
 def Home(request):
     return render(request, "alpha/home.html", {'home': 'active', 'chat': 'chat'})
 
@@ -100,7 +97,12 @@ def Post(request):
     if request.method == "POST":
         query = request.POST.get('msgbox', None)
         response = chat.respond(query)
-        chat.conversation["general"].append(response)
+        chat.conversation["general"].append('<br/>'.join(['ME: '+query, 'BOT: '+response]))
+        if query.lower() in ['bye', 'quit', 'bbye', 'seeya', 'goodbye']:
+            chat_saved = chat.conversation["general"][2:]
+            response = response + '<br/>' + '<h3>Chat Summary:</h3><br/>' + '<br/><br/>'.join(chat_saved)
+            chat.conversation["general"] = []
+            return JsonResponse({'response': response, 'query': query})
         #c = Conversation(query=query, response=response)
         return JsonResponse({'response': response, 'query': query})
     else:

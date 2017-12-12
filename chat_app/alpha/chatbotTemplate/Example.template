@@ -1,7 +1,15 @@
 {% group %}
     {% block %}
+        {% client %}(can you tell me about|can you tell me something about|can you tell something about)(.*){% endclient %}
+        {% response %}{% call whoIs:%2 %}{% endresponse %}
+    {% endblock %}
+    {% block %}
         {% client %}(Do you know about|what is|who is|tell me about|tell about|tell me something about|tell something about)(.*){% endclient %}
         {% response %}{% call whoIs:%2 %}{% endresponse %}
+    {% endblock %}
+    {% block %}
+        {% client %}(can you show me|can you Show|can you display me|can you display|recently|recent)(.*){% endclient %}
+        {% response %}{% call results:%2 %}{% endresponse %}
     {% endblock %}
     {% block %}
         {% client %}(show me|Show|display me|display|recently|recent)(.*){% endclient %}
@@ -14,22 +22,6 @@
         which can reproduce the capabilities of the human brain
         with greater speed and accuracy.
         {% endresponse %}
-    {% endblock %}
-    {% block %}
-        {% client %}(Do you know about|tell me about) (.*){% endclient %}
-        {% response %}{% call tellMeAbout:%2 %}{% endresponse %}
-    {% endblock %}
-    {% block %}
-        {% client %}what is (.*){% endclient %}
-        {% response %}{% call whatIs:%1 %}{% endresponse %}
-    {% endblock %}
-    {% block %}
-        {% client %}who is (.*){% endclient %}
-        {% response %}{% call whoIs:%1 %}{% endresponse %}
-    {% endblock %}
-    {% block %}
-        {% client %}where is (.*){% endclient %}
-        {% response %}{% call whereIs:%1 %}{% endresponse %}
     {% endblock %}
     {% block %}
         {% client %}Call me (.*){% endclient %}
@@ -286,7 +278,7 @@
 	    {% response %}Why don't you tell me?{% endresponse %}
     {% endblock %}
     {% block %}
-	    {% client %}(quit|BYE){% endclient %}
+	    {% client %}(quit|goodbye|bbye|seeya|bye){% endclient %}
 	    {% response %}Thank you for talking with me.{% endresponse %}
 	    {% response %}Good-bye.{% endresponse %}
 	    {% response %}Thank you, Nice talking to you.  Have a good day!{% endresponse %}
