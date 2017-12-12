@@ -26,4 +26,4 @@ Demo Link: https://django-chatbot-jpxxcozdgn.now.sh/
 <img src="./screenshots/3.png" height="600" hspace="40"><img src="./screenshots/4.png" height="600" hspace="40">
 <br/>
 <br/>
-<img src="./screenshots/Screenshot_2017-12-12-18-45-27-589_com.android.chrome.png.png" height="600" hspace="40">
+<img src="./screenshots/Screenshot_2017-12-12-18-45-27-589_com.android.chrome.png" height="600" hspace="40">
