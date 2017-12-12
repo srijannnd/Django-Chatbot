@@ -12,6 +12,7 @@ Demo Link: https://django-chatbot-jpxxcozdgn.now.sh/
 - He can show recent questions posted on stackoverflow for specific tag
 - He can display recent answered questions posted on stackoverflow for specific tag
 - Specify the no. of questions or he will get 5 results.
+- He gives Chat Summary when the chat ends.
 <br/>
 <br/>
 
@@ -23,3 +24,6 @@ Demo Link: https://django-chatbot-jpxxcozdgn.now.sh/
 <br/>
 <br/>
 <img src="./screenshots/3.png" height="600" hspace="40"><img src="./screenshots/4.png" height="600" hspace="40">
+<br/>
+<br/>
+<img src="./screenshots/5.png" height="600" hspace="40">
